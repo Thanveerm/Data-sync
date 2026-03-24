@@ -12,7 +12,6 @@ This module enables synchronization of `account.analytic.line` data from one Odo
 - Support for related fields (project, task, employee, etc.)
 
 ## Installation
-1. Copy the module to your Odoo addons directory
 2. Update the app list
 3. Install "Data Sync Server" module
 
