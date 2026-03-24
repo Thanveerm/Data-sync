@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_server_sync_config_tree" model="ir.ui.view">
+        <field name="name">server.sync.config.tree</field>
+        <field name="model">server.sync.config</field>
+        <field name="arch" type="xml">
+            <tree string="Server Sync Configurations">
+                <field name="name"/>
+                <field name="source_url"/>
+                <field name="source_db"/>
+                <field name="target_url"/>
+                <field name="target_db"/>
+                <field name="last_sync_date"/>
+                <field name="sync_count"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_server_sync_config_form" model="ir.ui.view">
+        <field name="name">server.sync.config.form</field>
+        <field name="model">server.sync.config</field>
+        <field name="arch" type="xml">
+            <form string="Server Sync Configuration">
+                <header>
+                    <button name="test_source_connection" string="Test Source Connection" type="object"
+                            class="btn-primary"/>
+                    <button name="test_target_connection" string="Test Target Connection" type="object"
+                            class="btn-primary"/>
+                    <button name="action_open_sync_wizard" string="Sync Data" type="object"
+                            class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_sync_wizard" type="object" class="oe_stat_button"
+                                icon="fa-refresh">
+                            <field name="sync_count" widget="statinfo" string="Synced Records"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group string="General">
+                            <field name="name"/>
+                            <field name="active"/>
+                            <field name="last_sync_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Source Server Configuration">
+                            <field name="source_url" placeholder="http://localhost:8069"/>
+                            <field name="source_db"/>
+                            <field name="source_username"/>
+                            <field name="source_password" password="True"/>
+                        </group>
+                        <group string="Target Server Configuration">
+                            <field name="target_url" placeholder="http://localhost:8070"/>
+                            <field name="target_db"/>
+                            <field name="target_username"/>
+                            <field name="target_password" password="True"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_server_sync_config_search" model="ir.ui.view">
+        <field name="name">server.sync.config.search</field>
+        <field name="model">server.sync.config</field>
+        <field name="arch" type="xml">
+            <search string="Server Sync Configuration">
+                <field name="name"/>
+                <field name="source_db"/>
+                <field name="target_db"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_server_sync_config" model="ir.actions.act_window">
+        <field name="name">Server Sync Configuration</field>
+        <field name="res_model">server.sync.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Server Sync Configuration
+            </p>
+            <p>
+                Configure source and target servers to sync account.analytic.line data.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_data_sync_root"
+              name="Data Sync"
+              web_icon="data_sync_server,static/description/icon.png"/>
+              sequence="100"/>
+
+    <menuitem id="menu_server_sync_config"
+              name="Sync Configurations"
+              parent="menu_data_sync_root"
+              action="action_server_sync_config"
+              sequence="10"/>
+</odoo>

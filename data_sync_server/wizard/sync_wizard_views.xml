@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_server_sync_wizard_form" model="ir.ui.view">
+        <field name="name">server.sync.wizard.form</field>
+        <field name="model">server.sync.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sync Data">
+                <header>
+                    <button name="action_sync_data" string="Start Sync" type="object"
+                            class="oe_highlight" attrs="{'invisible': [('state', 'in', ['syncing', 'done'])]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,syncing,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="config_id" readonly="1"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                        <group>
+                            <field name="records_synced" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                            <field name="records_failed" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                        </group>
+                    </group>
+                    <group string="Sync Log" attrs="{'invisible': [('sync_log', '=', False)]}">
+                        <field name="sync_log" nolabel="1" widget="text" readonly="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

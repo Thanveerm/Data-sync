@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Data Sync Server</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #4A90E2;
+            border-bottom: 3px solid #4A90E2;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2c5aa0;
+            margin-top: 30px;
+        }
+        .feature-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .feature-list li {
+            margin: 10px 0;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding-left: 0;
+        }
+        .steps li {
+            counter-increment: step-counter;
+            margin: 15px 0;
+            padding-left: 40px;
+            position: relative;
+        }
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #4A90E2;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Sync Server</h1>
+    <p><strong>Version:</strong> 16.0.1.0.0</p>
+    <p>Sync <code>account.analytic.line</code> data from one Odoo server to another based on date range selection.</p>
+
+    <h2>Features</h2>
+    <div class="feature-list">
+        <ul>
+            <li>✓ Configure source and target server connections</li>
+            <li>✓ Sync data based on create_date range (start date to end date)</li>
+            <li>✓ Automatic field mapping and related record resolution</li>
+            <li>✓ Connection testing for both source and target servers</li>
+            <li>✓ Detailed sync logs with success/failure tracking</li>
+            <li>✓ Support for related fields (project, task, employee, department, etc.)</li>
+            <li>✓ Tag synchronization with many2many relationship handling</li>
+        </ul>
+    </div>
+
+    <h2>How to Use</h2>
+    <ol class="steps">
+        <li>Go to <strong>Data Sync → Sync Configurations</strong></li>
+        <li>Create a new configuration with source and target server details</li>
+        <li>Click <strong>Test Source Connection</strong> and <strong>Test Target Connection</strong> to verify</li>
+        <li>Click <strong>Sync Data</strong> button</li>
+        <li>Select <strong>Start Date</strong> and <strong>End Date</strong> for records to sync</li>
+        <li>Click <strong>Start Sync</strong> and monitor the progress</li>
+    </ol>
+
+    <div class="highlight">
+        <strong>Important:</strong> The module filters records by <code>create_date</code> field. Only records created within the selected date range will be synced from source to target server.
+    </div>
+
+    <h2>Technical Details</h2>
+    <ul>
+        <li><strong>Model Synced:</strong> account.analytic.line</li>
+        <li><strong>Date Filter:</strong> Based on create_date field</li>
+        <li><strong>Communication:</strong> XML-RPC protocol</li>
+        <li><strong>Field Mapping:</strong> Automatic with name-based matching for related records</li>
+    </ul>
+
+    <h2>Fields Synchronized</h2>
+    <div class="feature-list">
+        <ul>
+            <li>name, date, unit_amount</li>
+            <li>project_id, task_id, employee_id</li>
+            <li>company_id, currency_id, amount</li>
+            <li>account_id, department_id</li>
+            <li>tag_ids (many2many)</li>
+        </ul>
+    </div>
+
+    <h2>Requirements</h2>
+    <ul>
+        <li>Odoo 16.0</li>
+        <li>XML-RPC access enabled on both servers</li>
+        <li>Modules: base, analytic, hr_timesheet</li>
+        <li>Related records must exist in target server with matching names</li>
+    </ul>
+
+    <h2>Support</h2>
+    <p>For support and questions, contact <strong>Codilar</strong></p>
+</body>
+</html>
