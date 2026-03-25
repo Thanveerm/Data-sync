@@ -7,7 +7,7 @@
         Module to sync account.analytic.line data from one server to another
         based on date range selection.
     """,
-    'author': 'Codilar',
+    'author': 'Thanveer',
     'depends': ['base', 'analytic', 'hr_timesheet'],
     'data': [
         'security/ir.model.access.csv',
